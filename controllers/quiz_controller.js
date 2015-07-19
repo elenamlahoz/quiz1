@@ -9,6 +9,6 @@ exports.answer=function(req, res){
 		res.render('quizes/answer',{respuesta: 'Correcto!!'});
 	}
 	else{
-		res.render('quizes/answer',{pregunta: 'Incorrecto'});}
+		res.render('quizes/answer',{respuesta: 'Incorrecto'});
 	}
 };
