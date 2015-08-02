@@ -22,14 +22,14 @@ var Quiz=sequelize.import(quiz_path);
 
 exports.Quiz=Quiz;
 
-sequelize.sync().then(function(){
+sequelize.sync().success(function(){
 	//Success ejecuta el manejador una vez creada la tabla
-	Quiz.count().then(function(count){
+	Quiz.count().success(function(count){
 		if(count===0){
 			Quiz.create({
 				pregunta:'Capital de Italia',
 				respuesta:'Roma'
-			}).then(function(){
+			}).success(function(){
 				console.log('Base de datos inicializada');
 			});
 		};
