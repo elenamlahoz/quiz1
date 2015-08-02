@@ -1,0 +1,14 @@
+//sequelize.sync() crea e inicializa la tabla de preguntas de la bd
+sequelize.sync().success(function(){
+	//success ejecuta el manejador una vez creada la tabla
+	Quiz.count().success(function(count){
+		if(count===0){
+			Quiz.create({
+				pregunta:'Capital de Italia',
+				respuesta:'Roma'
+			}).success(function(){
+				console.log('Base de datos inicializada');
+			});
+		};
+	});
+});
