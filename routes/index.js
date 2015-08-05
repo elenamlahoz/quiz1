@@ -3,7 +3,7 @@ var router = express.Router();
 
 var quizController=require('../controllers/quiz_controller');
 
-var autController=require('../controllers/aut_controller');
+//var autController=require('../controllers/aut_controller');
 
 //Página de entrada
 router.get('/',function(req,res){
@@ -21,6 +21,6 @@ router.get('/quizes/:quizId(\\d+)/edit', quizController.edit);
 router.put('/quizes/:quizId(\\d+)', quizController.update);
 router.delete('/quizes/:quizId(\\d+)', quizController.destroy);
 
-router.get('/author', autController.author);
+router.get('/author', quizController.author);
 
 module.exports = router;

@@ -28,18 +28,6 @@ exports.index=function(req, res){
 	).catch(function(error){next(error);});
 };
 
-/*
-//get /quizes
-exports.index=function(req,res){
-    var pregunta='';
-	if(req.query.search!=""){
-      pregunta=(req.query.search||"").replace(" ","%");
-	}
-    models.Quiz.findAll({where:['pregunta like ?','%'+pregunta+'%'],order:'pregunta ASC'}).then(function(quizes){
-            res.render('quizes/index.ejs',{quizes:quizes,errors:[]});
-    }).catch(function(error){next(error);});
-};*/
-
 //GET /quizes/:id
 exports.show=function(req, res){
 	res.render('quizes/show',{quiz: req.quiz, errors: []});
@@ -104,4 +92,9 @@ exports.destroy=function(req,res){
 	req.quiz.destroy().then(function(){
 		res.redirect('/quizes');
 	}).catch(function(error){next(error);});
+};
+
+//GET /author
+exports.author=function(req, res){
+	res.render('author',{aut: 'Mª Elena Morales', errors: []});
 };
