@@ -1,4 +1,5 @@
 var models = require('../models/models.js');
+var timeController=require('./time_controller');
 
 //AUTOLOAD: Factoriza el código si la ruta contiene :quizId 
 exports.load=function(req, res, next, quizId){ 
@@ -20,6 +21,7 @@ exports.load=function(req, res, next, quizId){
 
 //GET /quizes
 exports.index=function(req, res){
+	timeController.comprobarConexion(req,res);
 	var pregunta='';
 	if(req.query.search!=""){
       pregunta=(req.query.search||"").replace(" ","%");
@@ -33,11 +35,13 @@ exports.index=function(req, res){
 
 //GET /quizes/:id
 exports.show=function(req, res){
+	timeController.comprobarConexion(req,res);
 	res.render('quizes/show',{quiz: req.quiz, errors: []});
 };
 
 //GET /quizes/:id/answer
 exports.answer=function(req, res){
+	timeController.comprobarConexion(req,res);
 	var resultado ='Incorrecto';
 	if(req.query.respuesta===req.quiz.respuesta){
 		resultado='Correcto!!';
@@ -47,6 +51,7 @@ exports.answer=function(req, res){
 };
 
 exports.new=function(req, res){
+	timeController.comprobarConexion(req,res);
 	var quiz=models.Quiz.build(//Crea objeto build
 		{pregunta: "Pregunta", respuesta: "Respuesta", tema: "Tema"}
 	);
@@ -54,6 +59,7 @@ exports.new=function(req, res){
 };
 
 exports.create=function(req, res){
+	timeController.comprobarConexion(req,res);
 	var quiz=models.Quiz.build(req.body.quiz);
 	quiz.validate().then(function(err){
 		if(err){
@@ -70,12 +76,14 @@ exports.create=function(req, res){
 };
 
 exports.edit=function(req, res){
+	timeController.comprobarConexion(req,res);
 	var quiz=req.quiz;
 	
 	res.render('quizes/edit', {quiz: quiz, errors: []});
 };
 
 exports.update=function(req, res){
+	timeController.comprobarConexion(req,res);
 	req.quiz.pregunta=req.body.quiz.pregunta;
 	req.quiz.respuesta=req.body.quiz.respuesta;
 	req.quiz.tema=req.body.quiz.tema;
@@ -92,6 +100,7 @@ exports.update=function(req, res){
 };
 
 exports.destroy=function(req,res){
+	timeController.comprobarConexion(req,res);
 	req.quiz.destroy().then(function(){
 		res.redirect('/quizes');
 	}).catch(function(error){next(error);});
@@ -99,5 +108,6 @@ exports.destroy=function(req,res){
 
 //GET /author
 exports.author=function(req, res){
+	timeController.comprobarConexion(req,res);
 	res.render('author',{aut: 'Mª Elena Morales', errors: []});
 };

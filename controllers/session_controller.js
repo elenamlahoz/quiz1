@@ -26,7 +26,9 @@ exports.create=function(req, res){
 		}
 		//Crear req.session.user y guardar campos id y username
 		//La sesion se define por la existencia de req.session.user
+		var fecha=new Date();
 		req.session.user={id:user.id,username:user.username};
+		req.session.conexion=fecha.getTime();
 		res.redirect(req.session.redir.toString());
 	});
 };
